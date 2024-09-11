@@ -17,5 +17,4 @@ public class CarDefinition : ScriptableObject
     public float rollingResistanceCoefficient;
     public float brakingcoefficient;
     public AnimationCurve torqueCurve;
-
 }

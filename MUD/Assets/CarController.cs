@@ -34,7 +34,6 @@ public class CarController : MonoBehaviour
             velocity += acceleration * Time.fixedDeltaTime;
             rb.position += velocity;
         }
-
     }
 
     private Vector3 GetNetForces(){
