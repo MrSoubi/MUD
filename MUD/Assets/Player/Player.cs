@@ -1,14 +1,17 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public int playerIndex;
     private Camera cam;
-    [SerializeField] private GameObject car;
+    [SerializeField] public GameObject car;
     private CinemachineVirtualCamera virtualCamera;
+    public TextMeshProUGUI lifeText;
+    private int life = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -75,9 +78,14 @@ public class Player : MonoBehaviour
         cam.rect = new Rect(pos, size);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TakeDamage(int damage)
     {
-        
+        life -= damage;
+        lifeText.text = life.ToString();
+    }
+
+    public int GetSpeed()
+    {
+        return (int)car.GetComponent<CarControl>().GetComponent<Rigidbody>().velocity.magnitude;
     }
 }
