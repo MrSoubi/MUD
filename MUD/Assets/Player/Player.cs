@@ -82,6 +82,8 @@ public class Player : MonoBehaviour
     {
         life -= damage;
         lifeText.text = life.ToString();
+        car.GetComponent<TrailRenderer>().enabled = true;
+        car.GetComponent<CarControl>().tookDamage = 20;
     }
 
     public int GetSpeed()

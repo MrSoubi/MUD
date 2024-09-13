@@ -16,6 +16,7 @@ public class CarControl : MonoBehaviour
     WheelControl[] wheels;
     Rigidbody rigidBody;
 
+    public int tookDamage;
 
     [HideInInspector] public string throttleInputName;
     [HideInInspector] public string brakeInputName;
@@ -47,6 +48,13 @@ public class CarControl : MonoBehaviour
 
         if (IsGrounded())
         {
+            tookDamage--;
+
+            if (tookDamage < 0)
+            {
+                GetComponent<TrailRenderer>().enabled = false;
+            }
+
             // Calculate current speed in relation to the forward direction of the car
             // (this returns a negative number when traveling backwards)
             float forwardSpeed = Vector3.Dot(transform.forward, rigidBody.velocity);
