@@ -11,11 +11,16 @@ public class CarControl : MonoBehaviour
 
     public AnimationCurve engineTorque;
 
-    public int player;
     public float jumpForce = 1;
 
     WheelControl[] wheels;
     Rigidbody rigidBody;
+
+
+    [HideInInspector] public string throttleInputName;
+    [HideInInspector] public string brakeInputName;
+    [HideInInspector] public string steeringInputName;
+    [HideInInspector] public string jumpInputName;
 
     // Start is called before the first frame update
     void Start()
@@ -36,12 +41,9 @@ public class CarControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player == 1)
-        {
-            vInput = Input.GetAxis("[P1]Throttle") - Input.GetAxis("[P1]Brake");
-            hInput = Input.GetAxis("[P1]Steering");
-            desiredJump = Input.GetButtonDown("[P1]Jump");
-        }
+        vInput = Input.GetAxis(throttleInputName) - Input.GetAxis(brakeInputName);
+        hInput = Input.GetAxis(steeringInputName);
+        desiredJump = Input.GetButtonDown(jumpInputName);
 
         if (IsGrounded())
         {
@@ -87,7 +89,6 @@ public class CarControl : MonoBehaviour
 
             if (desiredJump)
             {
-                Debug.Log("grounded and ready to jump");
                 rigidBody.AddForce(Vector3.up * jumpForce * rigidBody.mass, ForceMode.Impulse);
             }
         }
